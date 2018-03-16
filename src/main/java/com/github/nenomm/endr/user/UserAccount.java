@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -18,7 +19,6 @@ public class UserAccount {
 
     private String email;
 
-    // todo perhaps some kind of converter for this?
     @Embedded
     private Password password;
 
@@ -27,4 +27,6 @@ public class UserAccount {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles = new TreeSet<Role>();
+
+    private ZonedDateTime registeredAt;
 }
