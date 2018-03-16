@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class EndrApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(EndrApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EndrApplication.class, args);
+    }
 }

@@ -2,6 +2,7 @@ package com.github.nenomm.endr.user;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Entity
 public class UserAccount {
 
     @Id

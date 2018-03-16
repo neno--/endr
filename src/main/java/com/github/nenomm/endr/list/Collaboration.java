@@ -2,13 +2,16 @@ package com.github.nenomm.endr.list;
 
 import com.github.nenomm.endr.user.User;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
-public class Collaboration {
+@Entity
+public class Collaboration implements Serializable {
 
     @Id
     @ManyToOne
