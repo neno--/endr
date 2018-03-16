@@ -5,7 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.Collection;
+import javax.persistence.OrderBy;
+import java.util.List;
 
 @Entity
 public class TodoList {
@@ -17,7 +18,12 @@ public class TodoList {
     String name;
 
     @OneToMany(mappedBy = "todoList")
-    private Collection<Collaboration> collaborations;
+    @OrderBy("createdAt DESC")
+    private List<Collaboration> collaborations;
+
+    @OneToMany(mappedBy = "todoList")
+    @OrderBy("createdAt DESC")
+    private List<TodoItem> todoItems;
 
 
 }

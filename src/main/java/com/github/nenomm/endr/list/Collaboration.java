@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Collaboration implements Serializable {
@@ -25,6 +26,8 @@ public class Collaboration implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Privilege privilege;
+
+    private ZonedDateTime createdAt;
 
     public enum Privilege {
         OWN,

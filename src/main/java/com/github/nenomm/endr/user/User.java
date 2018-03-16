@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import java.util.Collection;
 
 @Entity
@@ -28,5 +29,6 @@ public class User {
     private UserAccount userAccount;
 
     @OneToMany(mappedBy = "user")
+    @OrderBy("createdAt DESC")
     private Collection<Collaboration> collaborations;
 }
