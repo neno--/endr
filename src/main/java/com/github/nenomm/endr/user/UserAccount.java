@@ -1,6 +1,7 @@
 package com.github.nenomm.endr.user;
 
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class UserAccount {
 
     private String email;
 
+    // todo perhaps some kind of converter for this?
+    @Embedded
     private Password password;
 
     @OneToOne(mappedBy = "userAccount")
