@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 public class UserAccount {
@@ -28,7 +28,7 @@ public class UserAccount {
     private User user;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles = new TreeSet<Role>();
+    private Set<Role> roles = new HashSet<>();
 
-    private ZonedDateTime registeredAt;
+    private OffsetDateTime registeredAt;
 }

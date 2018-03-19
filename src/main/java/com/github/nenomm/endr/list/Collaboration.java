@@ -2,35 +2,35 @@ package com.github.nenomm.endr.list;
 
 import com.github.nenomm.endr.user.User;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
-public class Collaboration implements Serializable {
+public class Collaboration {
 
-    @Id
+    @EmbeddedId
+    CollaborationId collaborationId;
+
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "TODOLIST_ID")
+    @JoinColumn(name = "todoListId", insertable = false, updatable = false)
     private TodoList todoList;
 
     @Enumerated(EnumType.STRING)
     private Privilege privilege;
 
-    private ZonedDateTime createdAt;
+    private OffsetDateTime createdAt;
 
     public enum Privilege {
-        OWN,
+        CREATE,
         VIEW,
         COMPLETE
     }
