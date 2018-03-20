@@ -2,6 +2,7 @@ package com.github.nenomm.endr.user;
 
 
 import com.github.nenomm.endr.list.Collaboration;
+import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,15 +22,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    private String firstName;
-
-    private String lastName;
+    private String nick;
 
     @OneToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "USER_ACCOUNT_ID")
     private UserAccount userAccount;
 
     @OneToMany(mappedBy = "user")
     @OrderBy("todoList.name DESC")
     private Set<Collaboration> collaborations = new TreeSet<>();
+
+    public User(String nick, UserAccount userAccount) {
+        Assert.notNull(nick, "nick must not be null");
+        Assert.notNull(userAccount, "user account must not be null");
+
+        this.nick = nick;
+        this.userAccount = userAccount;
+    }
 }

@@ -1,5 +1,7 @@
 package com.github.nenomm.endr.list;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,4 +29,9 @@ public class TodoList {
     @OneToMany(mappedBy = "todoList")
     @OrderBy("createdAt DESC")
     private List<TodoItem> todoItems = new ArrayList<>();
+
+    public TodoList(String name) {
+        Assert.notNull(name, "name must not be null");
+        this.name = name;
+    }
 }

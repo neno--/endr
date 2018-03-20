@@ -1,6 +1,7 @@
 package com.github.nenomm.endr.list;
 
 import com.github.nenomm.endr.user.User;
+import org.springframework.util.Assert;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -35,4 +36,18 @@ public class Collaboration {
         COMPLETE
     }
 
+    public Collaboration(User user, TodoList todoList, Privilege privilege, OffsetDateTime createdAt) {
+        Assert.notNull(user, "user must not be null");
+        Assert.notNull(todoList, "todoList must not be null");
+        Assert.notNull(privilege, "privilege must not be null");
+        Assert.notNull(createdAt, "createdAt must not be null");
+        this.user = user;
+        this.todoList = todoList;
+        this.privilege = privilege;
+        this.createdAt = createdAt;
+    }
+
+    // todo: should we implement equals and hashCode here?
+    // or perhaps they are used form the key class?
+    // this class is used in set
 }

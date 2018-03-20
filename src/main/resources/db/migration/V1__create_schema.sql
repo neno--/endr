@@ -19,7 +19,7 @@ CREATE TABLE todo_item
      created_at   TIMESTAMP,
      description  VARCHAR(255),
      name         VARCHAR(255),
-     todolist_id  BIGINT,
+     todo_list_id  BIGINT,
      PRIMARY KEY (id)
   );
 
@@ -32,9 +32,9 @@ CREATE TABLE todo_list
 
 CREATE TABLE USER
   (
-     id         BIGINT NOT NULL,
-     first_name VARCHAR(255),
-     last_name  VARCHAR(255),
+     id              BIGINT NOT NULL,
+     nick            VARCHAR(255),
+     user_account_id BIGINT,
      PRIMARY KEY (id)
   );
 
@@ -58,12 +58,16 @@ ALTER TABLE collaboration
   USER;
 
 ALTER TABLE collaboration
-  ADD CONSTRAINT fk_collaboration_todolist FOREIGN KEY (todolist_id)
+  ADD CONSTRAINT fk_collaboration_todolist FOREIGN KEY (todo_list_id)
   REFERENCES todo_list;
 
 ALTER TABLE todo_item
-  ADD CONSTRAINT fk_todo_item_todo_list FOREIGN KEY (todolist_id)
+  ADD CONSTRAINT fk_todo_item_todo_list FOREIGN KEY (todo_list_id)
   REFERENCES todo_list;
+
+ALTER TABLE USER
+  ADD CONSTRAINT fk_user_user_account FOREIGN KEY (user_account_id)
+  REFERENCES user_account;
 
 ALTER TABLE user_account_roles
   ADD CONSTRAINT fh_user_account_roles_user_account FOREIGN KEY (user_account_id)
