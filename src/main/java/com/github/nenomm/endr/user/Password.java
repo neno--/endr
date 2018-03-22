@@ -1,10 +1,11 @@
 package com.github.nenomm.endr.user;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Password {
 
-    // todo make this more robust
+    @Column(nullable = false, unique = false)
     String password;
 }

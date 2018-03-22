@@ -1,13 +1,13 @@
 package com.github.nenomm.endr.list;
 
+import com.github.nenomm.endr.core.EntityIdentifier;
 import com.github.nenomm.endr.user.User;
 import org.springframework.util.Assert;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -16,26 +16,33 @@ import java.time.OffsetDateTime;
 @Entity
 public class TodoItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @EmbeddedId
+    private EntityIdentifier id = new EntityIdentifier();
 
+    @Column(nullable = false)
     private String name;
 
     private String description;
 
+    @Column(nullable = false)
     boolean complete;
 
+    @Column(nullable = false)
     private OffsetDateTime createdAt;
 
     // since java persistence 2.2
+    @Column(nullable = false)
     private OffsetDateTime completedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TODO_LIST_ID")
+    @JoinColumn(nullable = false)
     private TodoList todoList;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID")
     private User completedBy;
 

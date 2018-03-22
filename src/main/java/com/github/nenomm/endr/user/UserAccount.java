@@ -1,14 +1,15 @@
 package com.github.nenomm.endr.user;
 
+import com.github.nenomm.endr.core.EntityIdentifier;
 import org.springframework.util.Assert;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
@@ -17,22 +18,22 @@ import java.util.Set;
 @Entity
 public class UserAccount {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @EmbeddedId
+    private EntityIdentifier id = new EntityIdentifier();
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Embedded
     private Password password;
 
-    // user is optional
-    @OneToOne(mappedBy = "userAccount")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private User user;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
+    @Column(nullable = false, unique = false)
     private OffsetDateTime registeredAt;
 
     public UserAccount(String email, Password password) {
