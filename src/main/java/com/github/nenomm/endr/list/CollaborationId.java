@@ -1,5 +1,6 @@
 package com.github.nenomm.endr.list;
 
+import com.github.nenomm.endr.core.EntityIdentifier;
 import org.springframework.util.Assert;
 
 import javax.persistence.Column;
@@ -10,21 +11,21 @@ import java.util.Objects;
 @Embeddable
 public class CollaborationId implements Serializable {
 
-    @Column(name = "todoListId")
+    @Column(name = "TODO_LIST_ID")
     private String todoListId;
 
-    @Column(name = "userId")
+    @Column(name = "USER_ID")
     private String userId;
 
     public CollaborationId() {
     }
 
-    public CollaborationId(String todoListId, String userId) {
+    public CollaborationId(EntityIdentifier todoListId, EntityIdentifier userId) {
         Assert.notNull(todoListId, "Todo list identifier must not be null");
         Assert.notNull(userId, "User identifier must not be null");
 
-        this.todoListId = todoListId;
-        this.userId = userId;
+        this.todoListId = todoListId.getIdentity();
+        this.userId = userId.getIdentity();
     }
 
     @Override

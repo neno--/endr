@@ -3,6 +3,7 @@ package com.github.nenomm.endr.list;
 import com.github.nenomm.endr.user.User;
 import org.springframework.util.Assert;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,14 +18,14 @@ import java.time.OffsetDateTime;
 public class Collaboration implements Comparable {
 
     @EmbeddedId
-    CollaborationId collaborationId = new CollaborationId();
+    CollaborationId collaborationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "todoListId", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "TODO_LIST_ID", insertable = false, updatable = false)
     private TodoList todoList;
 
     @Enumerated(EnumType.STRING)
@@ -34,7 +35,6 @@ public class Collaboration implements Comparable {
     @Column(nullable = false)
     private OffsetDateTime createdAt;
 
-    // for hibernate
     private Collaboration() {
     }
 
@@ -43,6 +43,7 @@ public class Collaboration implements Comparable {
         Assert.notNull(todoList, "todoList must not be null");
         Assert.notNull(privilege, "privilege must not be null");
         Assert.notNull(createdAt, "createdAt must not be null");
+        this.collaborationId = new CollaborationId(todoList.getId(), user.getId());
         this.user = user;
         this.todoList = todoList;
         this.privilege = privilege;

@@ -1,6 +1,5 @@
 package com.github.nenomm.endr.config;
 
-import com.github.nenomm.endr.list.TodoItem;
 import com.github.nenomm.endr.list.TodoList;
 import com.github.nenomm.endr.user.Password;
 import com.github.nenomm.endr.user.User;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.OffsetDateTime;
 
 @Service
 @Profile("test")
@@ -37,9 +35,9 @@ public class DbInitializer {
 
         // add list to user
         TodoList list = new TodoList("testList");
-        TodoItem item = new TodoItem("testItem", "testDescription", OffsetDateTime.now(), list);
+        //TodoItem item = new TodoItem("testItem", "testDescription", OffsetDateTime.now(), list);
 
-        list.addItem(item);
+        //list.addItem(item);
 
         user.addList(list);
 

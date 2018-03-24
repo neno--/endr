@@ -1,11 +1,10 @@
 package com.github.nenomm.endr.list;
 
-import com.github.nenomm.endr.core.EntityIdentifier;
+import com.github.nenomm.endr.core.AbstractEntity;
 import org.springframework.util.Assert;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -16,10 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class TodoList {
-
-    @EmbeddedId
-    private EntityIdentifier id = new EntityIdentifier();
+public class TodoList extends AbstractEntity {
 
     @Column(nullable = false)
     String name;
@@ -32,7 +28,8 @@ public class TodoList {
     @OrderBy("createdAt DESC")
     private List<TodoItem> todoItems = new ArrayList<>();
 
-    private TodoList() {
+    // https://stackoverflow.com/questions/7273125/hibernate-envers-and-javassist-enhancement-failed-exception/7373445#7373445
+    public TodoList() {
     }
 
     public TodoList(String name) {

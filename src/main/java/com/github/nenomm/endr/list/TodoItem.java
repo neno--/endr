@@ -1,11 +1,10 @@
 package com.github.nenomm.endr.list;
 
-import com.github.nenomm.endr.core.EntityIdentifier;
+import com.github.nenomm.endr.core.AbstractEntity;
 import com.github.nenomm.endr.user.User;
 import org.springframework.util.Assert;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -14,10 +13,7 @@ import javax.persistence.OneToOne;
 import java.time.OffsetDateTime;
 
 @Entity
-public class TodoItem {
-
-    @EmbeddedId
-    private EntityIdentifier id = new EntityIdentifier();
+public class TodoItem extends AbstractEntity {
 
     @Column(nullable = false)
     private String name;

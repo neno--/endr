@@ -3,15 +3,17 @@ package com.github.nenomm.endr.core;
 import org.springframework.data.domain.Persistable;
 import org.springframework.util.ObjectUtils;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.Transient;
 
 @MappedSuperclass
-public class AbstractEntity<T extends EntityIdentifier> implements Persistable<T> {
+public class AbstractEntity implements Persistable<EntityIdentifier> {
 
-    T id;
+    @EmbeddedId
+    private EntityIdentifier id = new EntityIdentifier();
 
     @Transient
     private boolean isNew = true;
@@ -27,7 +29,7 @@ public class AbstractEntity<T extends EntityIdentifier> implements Persistable<T
             return false;
         }
 
-        AbstractEntity<?> that = (AbstractEntity<?>) obj;
+        AbstractEntity that = (AbstractEntity) obj;
 
         return ObjectUtils.nullSafeEquals(this.getId(), that.getId());
     }
@@ -38,7 +40,7 @@ public class AbstractEntity<T extends EntityIdentifier> implements Persistable<T
     }
 
     @Override
-    public T getId() {
+    public EntityIdentifier getId() {
         return id;
     }
 

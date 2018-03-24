@@ -1,5 +1,6 @@
 package com.github.nenomm.endr.user;
 
+import com.github.nenomm.endr.core.AbstractEntity;
 import com.github.nenomm.endr.core.EntityIdentifier;
 import org.springframework.util.Assert;
 
@@ -16,10 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class UserAccount {
-
-    @EmbeddedId
-    private EntityIdentifier id = new EntityIdentifier();
+public class UserAccount extends AbstractEntity {
 
     @Column(nullable = false, unique = true)
     private String email;
