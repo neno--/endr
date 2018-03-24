@@ -8,3 +8,5 @@ Todo:
  * Check if AbstractEntity#getId() returns type specific value.
  * Add serialVersionUID to serializables and value objects.
  * Always return new value objects.
+ * Implement versioning
+ * Add profile based db initialisation - for integration tests.

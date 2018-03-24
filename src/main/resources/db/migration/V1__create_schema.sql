@@ -1,7 +1,7 @@
 CREATE TABLE collaboration
   (
-     todo_list_id BIGINT NOT NULL,
-     user_id      BIGINT NOT NULL,
+     todo_list_id VARCHAR(255) NOT NULL,
+     user_id      VARCHAR(255) NOT NULL,
      created_at   TIMESTAMP NOT NULL,
      privilege    VARCHAR(255) NOT NULL,
      PRIMARY KEY (todo_list_id, user_id)

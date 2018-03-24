@@ -32,8 +32,15 @@ public class TodoList {
     @OrderBy("createdAt DESC")
     private List<TodoItem> todoItems = new ArrayList<>();
 
+    private TodoList() {
+    }
+
     public TodoList(String name) {
         Assert.notNull(name, "name must not be null");
         this.name = name;
+    }
+
+    public void addItem(TodoItem todoItem) {
+        todoItems.add(todoItem);
     }
 }

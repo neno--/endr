@@ -14,10 +14,10 @@ import javax.persistence.ManyToOne;
 import java.time.OffsetDateTime;
 
 @Entity
-public class Collaboration {
+public class Collaboration implements Comparable {
 
     @EmbeddedId
-    CollaborationId collaborationId;
+    CollaborationId collaborationId = new CollaborationId();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", insertable = false, updatable = false)
@@ -34,10 +34,8 @@ public class Collaboration {
     @Column(nullable = false)
     private OffsetDateTime createdAt;
 
-    public enum Privilege {
-        CREATE,
-        VIEW,
-        COMPLETE
+    // for hibernate
+    private Collaboration() {
     }
 
     public Collaboration(User user, TodoList todoList, Privilege privilege, OffsetDateTime createdAt) {
@@ -49,6 +47,29 @@ public class Collaboration {
         this.todoList = todoList;
         this.privilege = privilege;
         this.createdAt = createdAt;
+    }
+
+    public enum Privilege {
+        CREATE,
+        VIEW,
+        COMPLETE
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Collaboration c = (Collaboration) o;
+
+        if (createdAt.isBefore(c.getCreatedAt())) {
+            return -1;
+        } else if (createdAt.isAfter(c.getCreatedAt())) {
+            return 1;
+        }
+
+        return 0;
     }
 
     // todo: should we implement equals and hashCode here?

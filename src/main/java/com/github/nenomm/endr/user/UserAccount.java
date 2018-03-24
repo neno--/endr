@@ -36,9 +36,17 @@ public class UserAccount {
     @Column(nullable = false, unique = false)
     private OffsetDateTime registeredAt;
 
+    // for hibernate
+    public UserAccount() {
+    }
+
     public UserAccount(String email, Password password) {
         Assert.notNull(email, "email must not be null");
         Assert.notNull(password, "password must not be null");
+
+        this.email = email;
+        this.password = password;
+        registeredAt = OffsetDateTime.now();
     }
 
     public void setUser(User user) {

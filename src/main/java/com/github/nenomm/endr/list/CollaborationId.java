@@ -11,15 +11,15 @@ import java.util.Objects;
 public class CollaborationId implements Serializable {
 
     @Column(name = "todoListId")
-    private Long todoListId;
+    private String todoListId;
 
     @Column(name = "userId")
-    private Long userId;
+    private String userId;
 
     public CollaborationId() {
     }
 
-    public CollaborationId(Long todoListId, Long userId) {
+    public CollaborationId(String todoListId, String userId) {
         Assert.notNull(todoListId, "Todo list identifier must not be null");
         Assert.notNull(userId, "User identifier must not be null");
 
