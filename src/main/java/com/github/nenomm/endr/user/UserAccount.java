@@ -1,18 +1,17 @@
 package com.github.nenomm.endr.user;
 
 import com.github.nenomm.endr.core.AbstractEntity;
-import com.github.nenomm.endr.core.EntityIdentifier;
 import org.springframework.util.Assert;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,5 +68,18 @@ public class UserAccount extends AbstractEntity {
     public void setPassword(Password password) {
         Assert.notNull(password, "password must not be null");
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+            "email='" + email + '\'' +
+            ", roles=" + roles +
+            ", registeredAt=" + registeredAt +
+            '}';
     }
 }

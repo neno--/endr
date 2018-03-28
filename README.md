@@ -10,3 +10,4 @@ Todo:
  * Always return new value objects.
  * Implement versioning
  * Add profile based db initialisation - for integration tests.
+ * Encrypt passwords
