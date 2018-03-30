@@ -20,18 +20,19 @@ public class TodoListRepositoryCustomImpl implements TodoListRepositoryCustom {
 
         logger.info("Fetch data for id: {}", entityIdentifier);
 
-        /*List<TodoListDTO> todoListDTOS = entityManager.createQuery(
+
+        List<TodoListDTO> todoListDTOS = entityManager.createQuery(
             "select new " +
-                "    com.github.nenomm.endr.list.TodoListDTO(" +
+                "    com.github.nenomm.endr.list.TodoListDTO( " +
                 "    tl.id, " +
                 "    tl.name " +
                 ") " +
-                "from TodoList tl inner join Collaboration c on tl.id = c.todo_list_id " +
-                "where c.user_id = :user_id", TodoListDTO.class)
-            .setParameter("user_id", entityIdentifier.getIdentity())
-            .getResultList();*/
+                "from com.github.nenomm.endr.list.TodoList tl join tl.collaborations c " +
+                "where c.user.id = :user_id", TodoListDTO.class)
+            .setParameter("user_id", entityIdentifier)
+            .getResultList();
 
 
-        return null;
+        return todoListDTOS;
     }
 }

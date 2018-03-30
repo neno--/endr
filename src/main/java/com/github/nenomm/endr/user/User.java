@@ -32,7 +32,7 @@ public class User extends AbstractEntity {
     private Set<Collaboration> collaborations = new TreeSet<>();
 
     // for hibernate
-    private User() {
+    public User() {
     }
 
     public User(String nick, UserAccount userAccount) {

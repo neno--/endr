@@ -50,7 +50,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             List<UserPrivilege> privileges = new ArrayList<>(userAccount.getPrivileges());
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password, privileges);
 
-//            token.setDetails(new CustomUserDetails(userAccount.getUser().getId()));
+            token.setDetails(new CustomUserDetails(userAccount.getUser().getId()));
 
             return token;
         }
