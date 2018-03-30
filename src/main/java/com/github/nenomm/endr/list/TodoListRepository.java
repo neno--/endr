@@ -1,12 +1,9 @@
-package com.github.nenomm.endr.user;
+package com.github.nenomm.endr.list;
 
 import com.github.nenomm.endr.core.EntityIdentifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, EntityIdentifier> {
-
-    public User findByNick(String nick);
-
+public interface TodoListRepository extends CrudRepository<TodoList, EntityIdentifier>, TodoListRepositoryCustom {
 }

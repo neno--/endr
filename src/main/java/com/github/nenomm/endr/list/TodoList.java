@@ -40,4 +40,8 @@ public class TodoList extends AbstractEntity {
     public void addItem(TodoItem todoItem) {
         todoItems.add(todoItem);
     }
+
+    public String getName() {
+        return name;
+    }
 }

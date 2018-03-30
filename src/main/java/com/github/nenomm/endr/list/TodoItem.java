@@ -46,10 +46,31 @@ public class TodoItem extends AbstractEntity {
         Assert.notNull(name, "name must not be null");
         Assert.notNull(createdAt, "createdAt must not be null");
         Assert.notNull(todoList, "todoList must not be null");
+
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
         this.todoList = todoList;
         this.complete = false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public OffsetDateTime getCompletedAt() {
+        return completedAt;
     }
 }

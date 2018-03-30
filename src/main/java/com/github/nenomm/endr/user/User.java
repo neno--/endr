@@ -24,7 +24,7 @@ public class User extends AbstractEntity {
     @Column(nullable = false, unique = false)
     private String nick;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
     private UserAccount userAccount;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,6 +41,7 @@ public class User extends AbstractEntity {
 
         this.nick = nick;
         this.userAccount = userAccount;
+        userAccount.setUser(this);
     }
 
     public String getNick() {

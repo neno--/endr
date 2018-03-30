@@ -4,6 +4,7 @@ import com.github.nenomm.endr.list.TodoList;
 import com.github.nenomm.endr.user.Password;
 import com.github.nenomm.endr.user.User;
 import com.github.nenomm.endr.user.UserAccount;
+import com.github.nenomm.endr.user.UserPrivilege;
 import com.github.nenomm.endr.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,9 @@ public class DbInitializer {
         logger.info("Starting DB init...");
 
         UserAccount userAccount = new UserAccount("test@test.com", Password.getNew("test123"));
+        userAccount.addPrivilege(UserPrivilege.USER);
         User user = new User("testNick", userAccount);
+
 
         // add list to user
         TodoList list = new TodoList("testList");

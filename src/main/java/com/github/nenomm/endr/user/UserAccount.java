@@ -8,7 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.time.OffsetDateTime;
 import java.util.Collections;
@@ -24,11 +27,14 @@ public class UserAccount extends AbstractEntity {
     @Embedded
     private Password password;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = UserPrivilege.class)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "name")
+    private Set<UserPrivilege> privileges = new HashSet<>();
 
     @Column(nullable = false, unique = false)
     private OffsetDateTime registeredAt;
@@ -51,14 +57,14 @@ public class UserAccount extends AbstractEntity {
         this.user = user;
     }
 
-    public void addRole(Role role) {
-        Assert.notNull(role, "role must not be null");
-        roles.add(role);
+    public void addPrivilege(UserPrivilege privilege) {
+        Assert.notNull(privilege, "privilege must not be null");
+        privileges.add(privilege);
     }
 
-    public boolean hasRole(Role role) {
+    public boolean hasRole(UserPrivilege role) {
         Assert.notNull(role, "role must not be null");
-        return roles.contains(role);
+        return privileges.contains(role);
     }
 
     public Password getPassword() {
@@ -70,15 +76,19 @@ public class UserAccount extends AbstractEntity {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return Collections.unmodifiableSet(roles);
+    public Set<UserPrivilege> getPrivileges() {
+        return Collections.unmodifiableSet(privileges);
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
     public String toString() {
         return "UserAccount{" +
             "email='" + email + '\'' +
-            ", roles=" + roles +
+            ", privileges=" + privileges +
             ", registeredAt=" + registeredAt +
             '}';
     }

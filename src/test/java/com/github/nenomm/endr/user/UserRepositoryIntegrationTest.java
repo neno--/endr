@@ -10,7 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -22,7 +25,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @Transactional
-    public void findUser() {
+    public void findUsers() {
 
         Iterable<User> result = repository.findAll();
 
@@ -31,5 +34,19 @@ public class UserRepositoryIntegrationTest {
         User user = result.iterator().next();
 
         assertThat(user.getCollaborations(), is(Matchers.<Collaboration>hasSize(1)));
+    }
+
+    @Test
+    @Transactional
+    public void findUser() {
+
+        User user = repository.findByNick("testNick");
+
+        assertThat(user, notNullValue());
+
+        UserAccount userAccount = user.getUserAccount();
+
+        assertThat(userAccount, notNullValue());
+        assertThat(userAccount.getPrivileges(), is(not((empty()))));
     }
 }

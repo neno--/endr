@@ -1,9 +1,9 @@
 package com.github.nenomm.endr.security;
 
 import com.github.nenomm.endr.user.Password;
-import com.github.nenomm.endr.user.Role;
 import com.github.nenomm.endr.user.UserAccount;
 import com.github.nenomm.endr.user.UserAccountRepository;
+import com.github.nenomm.endr.user.UserPrivilege;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +47,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         } else {
             logger.info("User login: {}", userAccount.toString());
 
-            List<Role> roles = new ArrayList<>(userAccount.getRoles());
-            return new UsernamePasswordAuthenticationToken(email, password, roles);
+            List<UserPrivilege> privileges = new ArrayList<>(userAccount.getPrivileges());
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password, privileges);
+
+//            token.setDetails(new CustomUserDetails(userAccount.getUser().getId()));
+
+            return token;
         }
     }
 

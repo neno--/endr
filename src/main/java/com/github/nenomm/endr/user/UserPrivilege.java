@@ -5,14 +5,12 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@Embeddable
-public class Role implements GrantedAuthority {
-
-    @Column(nullable = false, unique = true)
-    private String name;
+public enum UserPrivilege implements GrantedAuthority {
+    ADMIN,
+    USER;
 
     @Override
     public String getAuthority() {
-        return name;
+        return this.name();
     }
 }
