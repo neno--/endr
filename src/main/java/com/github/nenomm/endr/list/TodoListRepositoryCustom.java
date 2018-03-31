@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface TodoListRepositoryCustom {
 
-    public List<TodoListDTO> findByUser(EntityIdentifier entityIdentifier);
+    public List<TodoListDTO> findByUserId(EntityIdentifier entityIdentifier);
 }

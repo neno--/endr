@@ -8,7 +8,6 @@ import java.util.Set;
 
 public interface TodoListService {
 
-    public Iterable<TodoList> findAll();
+    public List<TodoListDTO> findByUserId(EntityIdentifier entityIdentifier);
 
-    public List<TodoListDTO> findByUser(EntityIdentifier entityIdentifier);
 }

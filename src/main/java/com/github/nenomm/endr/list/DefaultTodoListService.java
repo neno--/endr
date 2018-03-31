@@ -17,12 +17,7 @@ public class DefaultTodoListService implements TodoListService {
     }
 
     @Override
-    public Iterable<TodoList> findAll() {
-        return todoListRepository.findAll();
-    }
-
-    @Override
-    public List<TodoListDTO> findByUser(EntityIdentifier entityIdentifier) {
-        return todoListRepository.findByUser(entityIdentifier);
+    public List<TodoListDTO> findByUserId(EntityIdentifier entityIdentifier) {
+        return todoListRepository.findByUserId(entityIdentifier);
     }
 }

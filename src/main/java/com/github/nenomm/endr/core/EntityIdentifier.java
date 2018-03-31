@@ -3,11 +3,11 @@ package com.github.nenomm.endr.core;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.UUID;
 
-@MappedSuperclass
+@Embeddable
 public class EntityIdentifier implements Serializable {
 
     @Column(name = "id", nullable = false, unique = true)
