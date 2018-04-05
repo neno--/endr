@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/todo-lists")
 public class TodoListResource {
@@ -23,7 +26,15 @@ public class TodoListResource {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<TodoListDTO> getTodoListsNew(Authentication authentication) {
-        return todoListService.findByUserId(getUserId(authentication));
+        // todo:  try to make this functional
+
+        List<TodoListDTO> result = todoListService.findByUserId(getUserId(authentication));
+
+        for (TodoListDTO element : result) {
+            element.add(linkTo(methodOn(TodoListResource.class).getTodoListsNew(authentication)).withSelfRel());
+        }
+
+        return result;
     }
 
     private static EntityIdentifier getUserId(Authentication authentication) {

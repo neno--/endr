@@ -16,3 +16,4 @@ Todo:
  - [] Manual hibernate setup - http://www.devglan.com/spring-boot/spring-boot-hibernate-5-example
  - [] When schema validation fails - what is a tolerated change?
  - [] Consider RBAC implementation - https://en.wikipedia.org/wiki/Role-based_access_control
+ - [] Try to use HATEOAS for todoLists
